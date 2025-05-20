@@ -57,10 +57,18 @@ DETAILS_URL = "https://places.googleapis.com/v1/places/{}"
 
 HEADERS = {"Content-Type": "application/json", "X-Goog-Api-Key": API_KEY}
 
-# Bounding box that covers the city
-LAT_MIN, LAT_MAX = 32.42, 32.59
-LON_MIN, LON_MAX = -117.13, -116.88
-LAT_STEP = LON_STEP = 0.02          # ≈ 2 km grid
+# # Bounding box that covers the city
+# LAT_MIN, LAT_MAX = 32.42, 32.59
+# LON_MIN, LON_MAX = -117.13, -116.88
+# LAT_STEP = LON_STEP = 0.02          # ≈ 2 km 
+
+# Bounding box that covers Tirana center
+LAT_MIN, LAT_MAX = 41.31, 41.35
+LON_MIN, LON_MAX = 19.80, 19.86
+LAT_STEP = LON_STEP = 0.05  # ≈ 5 km grid
+
+
+
 RADIUS_M = 1_500.0                  # circle radius at each point (m)
 
 # ─────────────────────────── helpers ────────────────────────────────────────
@@ -149,7 +157,7 @@ for idx, (lat, lon) in enumerate(grid, 1):
 # ─────────────────────────── export ─────────────────────────────────────────
 print(f"\nMatched businesses (no website + promo type): {len(rows)}")
 if rows:
-    out = "tijuana_no_website.csv"
+    out = "tirana_no_website.csv"
     with open(out, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=["name", "address", "phone"])
         w.writeheader(); w.writerows(rows)
